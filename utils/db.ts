@@ -4,10 +4,9 @@ const URI = process.env.MONGO_URI;
 
 export const conn = async() => {
   try {
-    const connect = mongoose.connect(URI as string);
-    console.log(`MongoDB connected: ${(await connect).connection.host}`);
+    const connect = await mongoose.connect(URI as string, { maxPoolSize: 10 });
+    console.log(`MongoDB connected: ${connect.connection.host}`);
   } catch (error) {
-    console.log(error);
-    process.exit(1);
+    console.log('Error connecting to database:', error);
   }
 }
