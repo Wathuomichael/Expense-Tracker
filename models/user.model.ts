@@ -27,6 +27,10 @@ const userSchema = new mongoose.Schema({
     type: String
   },
 
+  image: {
+    type: String
+  },
+
   balance: {
     type: Number,
     default: 0

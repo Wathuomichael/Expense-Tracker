@@ -4,10 +4,16 @@ export interface User {
   username: String,
   firstname: String,
   lastname: String,
-  balance: Number,
-  photo: String
+  balance?: Number,
+  image?: String
 }
 
+export interface updatedUserInterface {
+  username: String,
+  firstname: String,
+  lastname: String,
+  image?: String
+}
 export interface Transaction {
   clerkId: String,
   category: String,

@@ -1,6 +1,6 @@
 import { userModel } from "@/models/user.model";
 import { conn } from "./db";
-import { User } from "@/types";
+import { User, updatedUserInterface } from "@/types";
 import { revalidatePath } from "next/cache";
 
 export async function createUser(user: User) {
@@ -30,7 +30,7 @@ export async function getUserById(clerkId: string) {
   }
 }
 
-export async function updateUser(clerkId: string, user: User) {
+export async function updateUser(clerkId: string, user: updatedUserInterface) {
   try {
     await conn();
 
