@@ -1,7 +1,7 @@
 import { Webhook } from 'svix'
 import { headers } from 'next/headers'
 import { WebhookEvent } from '@clerk/nextjs/server'
-import { createUser, updateUser, deleteUser, getUserById } from '@/utils/user.actions'
+import { createUser, updateUser, deleteUser, getUserById } from '@/utils/actions/user.actions'
 import { NextResponse } from 'next/server'
 import { clerkClient } from '@clerk/nextjs'
 
@@ -79,6 +79,7 @@ export async function POST(req: Request) {
                 }    
             });
         }
+        console.log(newUser);
 
         return NextResponse.json({ message: 'User created', user: newUser }, { status: 201 });
     }  
@@ -94,6 +95,7 @@ export async function POST(req: Request) {
         }    
 
         const updatedUser = await updateUser(id, user);
+        console.log(updatedUser);
 
         return NextResponse.json({ message: 'User updated', user: updatedUser }, { status: 200 });
     }
@@ -102,6 +104,7 @@ export async function POST(req: Request) {
         const { id } = evt.data;
 
         const deletedUser = await deleteUser(id!);
+        console.log(deletedUser);
 
         return NextResponse.json({ message: 'User deleted', user: deletedUser }, { status: 200 });
     }

@@ -1,5 +1,7 @@
+'use server'
+
 import { userModel } from "@/models/user.model";
-import { conn } from "./db";
+import { conn } from "../db";
 import { User, updatedUserInterface } from "@/types";
 import { revalidatePath } from "next/cache";
 
