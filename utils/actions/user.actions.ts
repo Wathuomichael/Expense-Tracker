@@ -21,7 +21,7 @@ export async function getUserById(clerkId: string) {
   try {
     await conn();
 
-    const user = await userModel.findById(clerkId);
+    const user = await userModel.findOne({ clerkId: clerkId });
     if(!user) {
       throw new Error('User not found');
     }
@@ -36,7 +36,7 @@ export async function updateUser(clerkId: string, user: updatedUserInterface) {
   try {
     await conn();
 
-    const updatedUser = await userModel.findByIdAndUpdate(clerkId, user, { new: true });
+    const updatedUser = await userModel.findOneAndUpdate({ clerkId: clerkId }, user, { new: true });
 
     if(!updatedUser) {
       throw new Error('User update failed');
@@ -53,7 +53,7 @@ export async function deleteUser(clerkId: string) {
   try {
     await conn();
 
-    const deletedUser = await userModel.findByIdAndDelete(clerkId);
+    const deletedUser = await userModel.findOneAndDelete({ clerkId: clerkId });
 
     revalidatePath('/');
     return deletedUser ? JSON.parse(JSON.stringify(deletedUser)) : null;
