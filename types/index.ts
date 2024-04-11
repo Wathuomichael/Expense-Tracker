@@ -19,3 +19,8 @@ export interface Transaction {
   category: String,
   amount: Number,
 }
+
+export interface updatedTransactionInterface {
+  category: String,
+  amount: Number
+}  

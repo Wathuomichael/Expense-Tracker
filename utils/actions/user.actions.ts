@@ -10,7 +10,7 @@ export async function createUser(user: User) {
     await conn();
 
     const newUser = await userModel.create(user);
-    return JSON.parse(JSON.stringify(user));
+    return JSON.parse(JSON.stringify(newUser));
 
   } catch (error) {
       console.log(error);
@@ -21,7 +21,7 @@ export async function getUserById(clerkId: string) {
   try {
     await conn();
 
-    const user = await userModel.findOne({ clerkId: clerkId });
+    const user = await userModel.findOne({ clerkId });
     if(!user) {
       throw new Error('User not found');
     }
@@ -36,7 +36,7 @@ export async function updateUser(clerkId: string, user: updatedUserInterface) {
   try {
     await conn();
 
-    const updatedUser = await userModel.findOneAndUpdate({ clerkId: clerkId }, user, { new: true });
+    const updatedUser = await userModel.findOneAndUpdate({ clerkId }, user, { new: true });
 
     if(!updatedUser) {
       throw new Error('User update failed');
@@ -53,7 +53,8 @@ export async function deleteUser(clerkId: string) {
   try {
     await conn();
 
-    const deletedUser = await userModel.findOneAndDelete({ clerkId: clerkId });
+    const deletedUser = await userModel.findOneAndDelete({ clerkId });
+
 
     revalidatePath('/');
     return deletedUser ? JSON.parse(JSON.stringify(deletedUser)) : null;
